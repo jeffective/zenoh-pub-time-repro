@@ -5,13 +5,14 @@ services:
     volumes:
       - /dev/shm/:/dev/shm/
       - /tmp
-    environment:
-      - RUST_LOG=debug
+      - ./zenoh_router_config.json5:/zenoh_router_config.json5
+    command: -c /zenoh_router_config.json5
   client-sub:
     image: ghcr.io/astral-sh/uv:python3.12-bookworm
     restart: always
     volumes:
       - ./client_sub.py:/client_sub.py
+      - ./zenoh_client_config.json5:/zenoh_client_config.json5
     command: ["uv", "run", "/client_sub.py"]
     environment:
      - PYTHONUNBUFFERED=1
@@ -22,6 +23,7 @@ services:
     restart: always
     volumes:
       - ./client_pub.py:/client_pub.py
+      - ./zenoh_client_config.json5:/zenoh_client_config.json5
     command: ["uv", "run", "/client_pub.py"]
     environment:
      - PYTHONUNBUFFERED=1

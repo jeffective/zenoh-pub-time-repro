@@ -9,7 +9,7 @@ import zenoh
 key = "**"
 zenoh.init_log_from_env_or("error")
 print("Opening session...")
-with zenoh.open(zenoh.Config()) as session:
+with zenoh.open(zenoh.Config.from_file("/zenoh_client_config.json5")) as session:
     print(f"Declaring Subscriber on '{key}'...")
     with session.declare_subscriber(key) as sub:
         print("Press CTRL-C to quit...")

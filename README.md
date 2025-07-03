@@ -7,9 +7,9 @@
 
 ```
 client-pub-1  | Opening session...
-client-pub-1  | first pub took: 0.026115057 s
-client-pub-1  | second pub took: 0.002108434 s
-client-pub-1  | third pub took: 0.001744916 s
+client-pub-1  | first pub took: 0.108305781 s
+client-pub-1  | second pub took: 0.004428052 s
+client-pub-1  | third pub took: 0.004305572 s
 ```
 
 more info about system that produced this result:
