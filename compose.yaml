@@ -1,0 +1,29 @@
+services:
+  router:
+    image: eclipse/zenoh:1.4.0
+    restart: always
+    volumes:
+      - /dev/shm/:/dev/shm/
+      - /tmp
+    environment:
+      - RUST_LOG=debug
+  client-sub:
+    image: ghcr.io/astral-sh/uv:python3.12-bookworm
+    restart: always
+    volumes:
+      - ./client_sub.py:/client_sub.py
+    command: ["uv", "run", "/client_sub.py"]
+    environment:
+     - PYTHONUNBUFFERED=1
+    depends_on:
+      - router
+  client-pub:
+    image: ghcr.io/astral-sh/uv:python3.12-bookworm
+    restart: always
+    volumes:
+      - ./client_pub.py:/client_pub.py
+    command: ["uv", "run", "/client_pub.py"]
+    environment:
+     - PYTHONUNBUFFERED=1
+    depends_on:
+      - router
